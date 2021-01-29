@@ -1,6 +1,11 @@
-package perceptron
+package percy
 
-func TrainWithAlpha(inputs [][]float64, outputs []int, iters int, alpha float64) []float64 {
+func TrainWithAlpha(rawInputs [][]float64, intOutputs []int, iters int, alpha float64) []float64 {
+	inputs := scaleEachToNorm(rawInputs, 1)
+
+	outputs := make([]float64, len(intOutputs))
+	for i, o := range intOutputs { outputs[i] = float64(o) }
+
 	var weights []float64
 	var averages []float64
 
@@ -12,19 +17,18 @@ func TrainWithAlpha(inputs [][]float64, outputs []int, iters int, alpha float64)
 	}
 
 	for iter := 0; iter < iters; iter++ {
-		for i, x := range inputs {
-			inp := scaleToNorm(x, 1)
-			out := float64(outputs[i])
+		for i, inp := range inputs {
+			out := outputs[i]
 
 			if dot(weights, inp) * out <= 0 { // if prediction and output do not match
-				for i, w := range weights {
-					modW := w + inp[i] * out * alpha // w - Δ
+				for f, w := range weights {
+					modW := w + inp[f] * out * alpha // w - Δ
 					
-					weights[i] = modW
-					averages[i] += modW
+					weights[f] = modW
+					averages[f] += modW
 				}
 			} else {
-				for i, w := range weights { averages[i] += w }
+				for f, w := range weights { averages[f] += w }
 			}
 		}
 	}
