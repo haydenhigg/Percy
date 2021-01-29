@@ -36,6 +36,10 @@ func Train(unscaledInputs [][]float64, intOutputs []int, iters int, alpha float6
 	return averages
 }
 
+func RawPredict(weights, x []float64) float64 {
+	return dot(weights, scaleToNorm(x, 1))
+}
+
 func Predict(weights, x []float64) int {
-	if dot(weights, scaleToNorm(x, 1)) > 0 { return 1 } else { return -1 }
+	if RawPredict(weights, x) > 0 { return 1 } else { return -1 }
 }
