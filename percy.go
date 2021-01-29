@@ -38,7 +38,7 @@ func Train(inps [][]float64, outs []int, iters int, alpha float64) []float64 {
 	if n := len(inps); n == 0 {
 		return []float64{}
 	} else {
-		return TrainWithWeights(make([]float64, len(inps[0])), inps, outs, iters, alpha)
+		return TrainFromWeights(make([]float64, len(inps[0])), inps, outs, iters, alpha)
 	}
 }
 
