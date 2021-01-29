@@ -21,6 +21,13 @@ func scaleEachToNorm(mat [][]float64, target float64) [][]float64 {
 	return ret
 }
 
+func intsToFloats(arr []int) []float64 {
+	ret := make([]float64, len(arr))
+	for i, x := range arr { ret[i] = float64(x) }
+	
+	return ret
+}
+
 func dot(a, b []float64) float64 {
 	s := 0.
 	for i, x := range a { s += x * b[i] }
