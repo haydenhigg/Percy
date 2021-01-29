@@ -1,4 +1,4 @@
-package perceptron
+package percy
 
 import "math"
 
