@@ -1,19 +1,17 @@
 package percy
 
-func Train(unscaledInputs [][]float64, intOutputs []int, iters int, alpha float64) []float64 {
-	inputs := scaleEachToNorm(unscaledInputs, 1)
-
-	outputs := make([]float64, len(intOutputs))
-	for i, o := range intOutputs { outputs[i] = float64(o) }
+func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters int, alpha float64) []float64 {
+	inputs := scaleEachToNorm(inps, 1)
+	outputs := intsToFloats(outs)
 
 	var weights []float64
 	var averages []float64
 
 	if n := len(inputs); n == 0 {
-		return []float64{}
+		return weights
 	} else {
-		weights = make([]float64, len(inputs[0]))
-		averages = make([]float64, len(inputs[0]))
+		weights = initWeights
+		averages = initWeights
 	}
 
 	for iter := 0; iter < iters; iter++ {
@@ -34,6 +32,14 @@ func Train(unscaledInputs [][]float64, intOutputs []int, iters int, alpha float6
 	}
 
 	return averages
+}
+
+func Train(inps [][]float64, outs []int, iters int, alpha float64) []float64 {
+	if n := len(inputs); n == 0 {
+		return []float64{}
+	} else {
+		return TrainWithWeights(make([]float64, len(inputs[0])), inps, outs, iters, alpha)
+	}
 }
 
 func RawPredict(weights, x []float64) float64 {
