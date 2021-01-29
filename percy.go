@@ -1,18 +1,18 @@
 package percy
 
 func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters int, alpha float64) []float64 {
-	inputs := scaleEachToNorm(inps, 1)
-	outputs := intsToFloats(outs)
-
 	var weights []float64
 	var averages []float64
 
-	if n := len(inputs); n == 0 {
+	if n := len(inps); n == 0 {
 		return initWeights
 	} else {
 		weights = initWeights
 		averages = initWeights
 	}
+	
+	inputs := scaleEachToNorm(inps, 1)
+	outputs := intsToFloats(outs)
 
 	for iter := 0; iter < iters; iter++ {
 		for i, inp := range inputs {
@@ -35,10 +35,10 @@ func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters
 }
 
 func Train(inps [][]float64, outs []int, iters int, alpha float64) []float64 {
-	if n := len(inputs); n == 0 {
+	if n := len(inps); n == 0 {
 		return []float64{}
 	} else {
-		return TrainWithWeights(make([]float64, len(inputs[0])), inps, outs, iters, alpha)
+		return TrainWithWeights(make([]float64, len(inps[0])), inps, outs, iters, alpha)
 	}
 }
 
