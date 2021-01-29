@@ -14,6 +14,13 @@ func scaleToNorm(arr []float64, target float64) []float64 {
 	return ret
 }
 
+func scaleEachToNorm(mat [][]float64, target float64) [][]float64 {
+	ret := make([][]float64, len(mat))
+	for i, x := range mat { ret[i] = scaleToNorm(x, target) }
+	
+	return ret
+}
+
 func dot(a, b []float64) float64 {
 	s := 0.
 	for i, x := range a { s += x * b[i] }
