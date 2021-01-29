@@ -8,7 +8,7 @@ func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters
 	var averages []float64
 
 	if n := len(inputs); n == 0 {
-		return weights
+		return initWeights
 	} else {
 		weights = initWeights
 		averages = initWeights
