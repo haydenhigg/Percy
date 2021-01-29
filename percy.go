@@ -7,10 +7,13 @@ func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters
 	if n := len(inps); n == 0 {
 		return initWeights
 	} else {
-		weights = initWeights
-		averages = initWeights
+		weights = make([]float64, len(initWeights))
+		averages = make([]float64, len(initWeights))
+
+		copy(weights, initWeights)
+		copy(averages, initWeights)
 	}
-	
+
 	inputs := scaleEachToNorm(inps, 1)
 	outputs := intsToFloats(outs)
 
@@ -20,7 +23,7 @@ func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters
 
 			if dot(weights, inp) * out <= 0 { // if prediction and output do not match
 				for f, w := range weights {
-					modW := w + inp[f] * out * alpha // w - Δ
+					modW := w + inp[f] * out * alpha
 					
 					weights[f] = modW
 					averages[f] += modW
