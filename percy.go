@@ -29,7 +29,9 @@ func TrainFromWeights(initWeights []float64, inps [][]float64, outs []int, iters
 					averages[f] += modW
 				}
 			} else {
-				for f, w := range weights { averages[f] += w }
+				for f, w := range weights {
+					averages[f] += w
+				}
 			}
 		}
 	}
@@ -50,5 +52,9 @@ func RawPredict(weights, x []float64) float64 {
 }
 
 func Predict(weights, x []float64) int {
-	if RawPredict(weights, x) > 0 { return 1 } else { return -1 }
+	if RawPredict(weights, x) > 0 {
+		return 1
+	} else {
+		return -1
+	}
 }
