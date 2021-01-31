@@ -2,14 +2,18 @@ package percy
 
 import "math"
 
-func scaleToNorm(arr []float64, target float64) []float64 {
+func norm(arr []float64) float64 {
 	s := 0.
-
+	
 	for _, i := range arr {
 		s += i * i
 	}
+	
+	return math.Sqrt(s)
+}
 
-	fac := target / math.Sqrt(s)
+func scaleToNorm(arr []float64, target float64) []float64 {
+	fac := target / norm(arr)
 
 	ret := make([]float64, len(arr))
 
