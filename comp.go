@@ -14,7 +14,7 @@ func norm(arr []float64) float64 {
 
 func scaleToNorm(arr []float64, target float64) []float64 {
 	if n := norm(arr); n != 0 {
-		fac := target / norm(arr)
+		fac := target / n
 
 		ret := make([]float64, len(arr))
 
