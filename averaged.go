@@ -1,6 +1,6 @@
 package percy
 
-func TrainAveragedFromWeights(initWeights []float64, inputs [][]float64, outputs []float64, iters int, alpha float64) []float64 {
+func TrainAveragedFromWeights(initWeights []float64, inputs [][]float64, outputs []float64, iters int, learningRate float64) []float64 {
 	var weights []float64
 	var averages []float64
 
@@ -20,7 +20,7 @@ func TrainAveragedFromWeights(initWeights []float64, inputs [][]float64, outputs
 
 			if dot(weights, inp) * out <= 0 { // if prediction and output do not match
 				for f, w := range weights {
-					modW := w + inp[f] * out * alpha
+					modW := w + inp[f] * out * learningRate
 					
 					weights[f] = modW
 					averages[f] += modW
@@ -31,12 +31,6 @@ func TrainAveragedFromWeights(initWeights []float64, inputs [][]float64, outputs
 				}
 			}
 		}
-	}
-	
-	n := float64(len(inputs))
-	
-	for f := range averages {
-		averages[f] /= n
 	}
 
 	return averages
