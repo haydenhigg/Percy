@@ -37,14 +37,14 @@ import (
 
 func main() {
   inputs := [][]float64{[]float64{...}, []float64{...}, ...}
-  outputs := []int{1, -1, ...}
+  outputs := []float64{1, -1, ...}
   
   iters := 200
   alpha := 0.01
   
-  weights := percy.Train(inputs, outputs, iters, alpha)
+  weights := percy.Train(percy.RegularizeAll(inputs), outputs, iters, alpha)
   
-  fmt.Println(percy.Predict(weights, []float64{...}))
+  fmt.Println(percy.Predict(weights, percy.Regularize([]float64{...})))
 }
 ```
 
