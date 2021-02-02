@@ -1,10 +1,10 @@
 package percy
 
-func TrainAveragedFromWeights(initWeights []float64, inps [][]float64, outs []int, iters int, alpha float64) []float64 {
+func TrainAveragedFromWeights(initWeights []float64, inputs [][]float64, outputs []float64, iters int, alpha float64) []float64 {
 	var weights []float64
 	var averages []float64
 
-	if n := len(inps); n == 0 {
+	if n := len(inputs); n == 0 {
 		return initWeights
 	} else {
 		weights = make([]float64, len(initWeights))
@@ -13,9 +13,6 @@ func TrainAveragedFromWeights(initWeights []float64, inps [][]float64, outs []in
 		copy(weights, initWeights)
 		copy(averages, initWeights)
 	}
-
-	inputs := scaleEachToNorm(inps, 1)
-	outputs := intsToFloats(outs)
 
 	for iter := 0; iter < iters; iter++ {
 		for i, inp := range inputs {
