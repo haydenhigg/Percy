@@ -13,15 +13,19 @@ func norm(arr []float64) float64 {
 }
 
 func scaleToNorm(arr []float64, target float64) []float64 {
-	fac := target / norm(arr)
+	if n := norm(arr); n != 0 {
+		fac := target / norm(arr)
 
-	ret := make([]float64, len(arr))
+		ret := make([]float64, len(arr))
 
-	for i, x := range arr {
-		ret[i] = x * fac
+		for i, x := range arr {
+			ret[i] = x * fac
+		}
+
+		return ret
+	} else {
+		return make([]float64, len(arr))
 	}
-
-	return ret
 }
 
 func scaleEachToNorm(mat [][]float64, target float64) [][]float64 {
