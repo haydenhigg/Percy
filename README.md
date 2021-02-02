@@ -51,7 +51,7 @@ func main() {
 ## notes
 
 - Assumptions are not checked by this implementation. For example, if each vector of the `inputs` matrix does not have the same length, this will fail; if `inputs` and `outputs` are different lengths, this will fail; if `alpha` is a negative number, the algorithm will not converge; etc.
-- It may be helpful, in many cases, to:
+- Though not necessary, it may be helpful to
   - shuffle the data before training, especially when using the standard Perceptron
-  - regularize the norms of all training inputs and of all inputs to be predicted
+  - regularize the norms of all training inputs and of all inputs to be predicted (see `Regularize` and `RegularizeAll`)
   - initialize weights to small random values rather than 0s
