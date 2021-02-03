@@ -12,13 +12,13 @@ func RegularizeAll(mat [][]float64) [][]float64 {
 
 // models
 
-type model struct{
+type Model struct{
 	Weights []float64
 	Bias	float64
 }
 
-func NewModel(weights []float64, bias float64) model {
-	return model{
+func NewModel(weights []float64, bias float64) Model {
+	return Model{
 		Weights: weights,
 		Bias: bias,
 	}
@@ -26,9 +26,9 @@ func NewModel(weights []float64, bias float64) model {
 
 // training
 
-func Train(inputs [][]float64, outputs []float64, iters int, learningRate float64) model {
+func Train(inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
 	if n := len(inputs); n == 0 {
-		return model{}
+		return Model{}
 	} else {
 		init := NewModel(make([]float64, len(inputs[0])), 0)
 
@@ -36,9 +36,9 @@ func Train(inputs [][]float64, outputs []float64, iters int, learningRate float6
 	}
 }
 
-func TrainAveraged(inputs [][]float64, outputs []float64, iters int, learningRate float64) model {
+func TrainAveraged(inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
 	if n := len(inputs); n == 0 {
-		return model{}
+		return Model{}
 	} else {
 		init := NewModel(make([]float64, len(inputs[0])), 0)
 
@@ -48,11 +48,11 @@ func TrainAveraged(inputs [][]float64, outputs []float64, iters int, learningRat
 
 // prediction
 
-func (mdl model) RawPredict(x []float64) float64 {
+func (mdl Model) RawPredict(x []float64) float64 {
 	return dot(mdl.Weights, x) + mdl.Bias
 }
 
-func (mdl model) Predict(x []float64) float64 {
+func (mdl Model) Predict(x []float64) float64 {
 	if dot(mdl.Weights, x) > -mdl.Bias {
 		return 1
 	} else {
