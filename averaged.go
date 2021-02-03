@@ -30,6 +30,12 @@ func TrainAveragedFromModel(init Model, inputs [][]float64, outputs []float64, i
 
 				bias += gradient
 			} else {
+				// writing this loop as well as the averages[f] += weights[f] part in the
+				// loop above seems redundant (i.e. it is possible to pull them both out of
+				// the if-else and have a separate loop that does it) but it saves one un-
+				// necessary loop when prediction and output do not match. miniscule per-
+				// formance advantage possibly is not worth the hit to code-readability,
+				// but I'm generally prioritising performance here
 				for f, w := range weights {
 					averages[f] += w
 				}
