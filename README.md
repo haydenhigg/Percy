@@ -16,7 +16,8 @@ import "./percy"
 
 - `Regularize(arr []float64) []float64`: Regularizes the L2 norm of `arr` to 1.
 - `RegularizeAll(mat [][]float64) [][]float64`: Regularizes the L2 norm of every row of `mat` to 1.
-- `CreateModel(weights []float64, bias float64) model`: Creates a model with input `weights` and an input `bias`.
+---
+- `NewModel(weights []float64, bias float64) model`: Creates a model with input `weights` and an input `bias`.
 ---
 - `Train(inputs [][]float64, outputs []float64, iters int, alpha float64) model`: Trains a Perceptron classifier on the training `inputs` matrix and `outputs` vector for `iters` iterations with a learning rate of `alpha`. Returns the final model (see below)
 - `TrainFromModel(init model, inputs [][]float64, outputs []float64, iters int, alpha float64) model`: The same as `Train`, but initializes the model to `init` rather than a model with weights as a zero-vector and a bias of zero.
