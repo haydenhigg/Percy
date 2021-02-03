@@ -17,10 +17,10 @@ type model struct{
 	Bias	float64
 }
 
-func CreateModel(weights []float64, bias float64) model {
+func NewModel(weights []float64, bias float64) model {
 	return model{
 		Weights: weights,
-		Bias: 0,
+		Bias: bias,
 	}
 }
 
@@ -30,7 +30,7 @@ func Train(inputs [][]float64, outputs []float64, iters int, learningRate float6
 	if n := len(inputs); n == 0 {
 		return model{}
 	} else {
-		init := CreateModel(make([]float64, len(inputs[0])), 0)
+		init := NewModel(make([]float64, len(inputs[0])), 0)
 
 		return TrainFromModel(init, inputs, outputs, iters, learningRate)
 	}
@@ -40,7 +40,7 @@ func TrainAveraged(inputs [][]float64, outputs []float64, iters int, learningRat
 	if n := len(inputs); n == 0 {
 		return model{}
 	} else {
-		init := CreateModel(make([]float64, len(inputs[0])), 0)
+		init := NewModel(make([]float64, len(inputs[0])), 0)
 
 		return TrainAveragedFromModel(init, inputs, outputs, iters, learningRate)
 	}
