@@ -2,6 +2,14 @@ package percy
 
 import "math"
 
+func makeCopy(arr []float64) []float64 {
+	ret := make([]float64, len(arr))
+
+	copy(ret, arr)
+
+	return ret
+}
+
 func norm(arr []float64) float64 {
 	s := 0.
 	
