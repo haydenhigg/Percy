@@ -25,5 +25,5 @@ func TrainFromModel(init model, inputs [][]float64, outputs []float64, iters int
 		}
 	}
 
-	return CreateModel(weights, bias)
+	return NewModel(weights, bias)
 }
