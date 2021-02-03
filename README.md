@@ -16,14 +16,19 @@ import "./percy"
 
 - `Regularize(arr []float64) []float64`: Regularizes the L2 norm of `arr` to 1.
 - `RegularizeAll(mat [][]float64) [][]float64`: Regularizes the L2 norm of every row of `mat` to 1.
+- `CreateModel(weights []float64, bias float64) model`: Creates a model with input `weights` and an input `bias`.
 ---
-- `Train(inputs [][]float64, outputs []float64, iters int, alpha float64) []float64`: Trains a Perceptron classifier on the training `inputs` matrix and `outputs` vector for `iters` iterations with a learning rate of `alpha`. Returns the final weights vector.
-- `TrainFromWeights(initWeights []float64, inputs [][]float64, outputs []float64, iters int, alpha float64) []float64`: The same as `Train`, but initializes the weights to `initWeights` rather than a zero vector.
-- `TrainAveraged(inputs [][]float64, outputs []float64, iters int, alpha float64) []float64`: The same as `Train`, but trains an Averaged Perceptron classifier instead.
-- `TrainAveragedFromWeights(initWeights []float64, inputs [][]float64, outputs []float64, iters int, alpha float64) []float64`: The same as `TrainFromWeights`, but trains an Averaged Perceptron classifier instead.
+- `Train(inputs [][]float64, outputs []float64, iters int, alpha float64) model`: Trains a Perceptron classifier on the training `inputs` matrix and `outputs` vector for `iters` iterations with a learning rate of `alpha`. Returns the final model (see below)
+- `TrainFromModel(init model, inputs [][]float64, outputs []float64, iters int, alpha float64) model`: The same as `Train`, but initializes the model to `init` rather than a model with weights as a zero-vector and a bias of zero.
+- `TrainAveraged(inputs [][]float64, outputs []float64, iters int, alpha float64) model`: The same as `Train`, but trains an Averaged Perceptron classifier instead.
+- `TrainAveragedFromModel(init model, inputs [][]float64, outputs []float64, iters int, alpha float64) model`: The same as `TrainFromWeights`, but trains an Averaged Perceptron classifier instead.
 ---
-- `Predict(weights, x []float64) float64`: Returns the predicted output (which will be {-1, 1}) for the weights vector `weights` and the input vector `x`.
-- `RawPredict(weights, x []float64) float64`: Returns the output before being binarized to {-1, 1}.
+- `(mdl model) Predict(x []float64) float64`: Returns the predicted output (which will be {-1, 1}) for the model `mdl` and the input vector `x`.
+- `(mdl model) RawPredict(x []float64) float64`: Returns the output before being binarized to {-1, 1}.
+
+### model
+
+The `model` is just a struct containing the exported fields `Weights` ([]float64) and `Bias` (float64).
 
 ### example
 
@@ -40,11 +45,11 @@ func main() {
   outputs := []float64{1, -1, ...}
   
   iters := 200
-  alpha := 0.01
+  learningRate := 0.01
   
-  weights := percy.Train(percy.RegularizeAll(inputs), outputs, iters, alpha)
+  trainedModel := percy.Train(percy.RegularizeAll(inputs), outputs, iters, learningRate)
   
-  fmt.Println(percy.Predict(weights, percy.Regularize([]float64{...})))
+  fmt.Println(trainedModel.Predict(percy.Regularize([]float64{...})))
 }
 ```
 
