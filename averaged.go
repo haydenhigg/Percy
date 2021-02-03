@@ -8,8 +8,8 @@ func TrainAveragedFromModel(init Model, inputs [][]float64, outputs []float64, i
 	weights := makeCopy(init.Weights)
 	averages := makeCopy(init.Weights)
 
-	bias := 0.
-	biasAverage := 0.
+	bias := init.Bias
+	biasAverage := init.Bias
 	
 	var out float64
 	var gradient float64
