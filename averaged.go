@@ -1,6 +1,6 @@
 package percy
 
-func TrainAveragedFromModel(init model, inputs [][]float64, outputs []float64, iters int, learningRate float64) model {
+func TrainAveragedFromModel(init Model, inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
 	if n := len(inputs); n == 0 {
 		return init
 	}
