@@ -35,8 +35,5 @@ func TrainAveragedFromModel(init model, inputs [][]float64, outputs []float64, i
 		}
 	}
 
-	return model{
-		Weights: averages,
-		Bias: biasAverage,
-	}
+	return CreateModel(averages, biasAverage)
 }
