@@ -8,13 +8,16 @@ func TrainFromModel(init model, inputs [][]float64, outputs []float64, iters int
 	weights := makeCopy(init.Weights)
 
 	bias := 0.
+	
+	var out float64
+	var gradient float64
 
 	for iter := 0; iter < iters; iter++ {
 		for i, inp := range inputs {
-			out := outputs[i]
+			out = outputs[i]
 
 			if (dot(weights, inp) + bias) * out <= 0 { // if prediction and output do not match
-				gradient := out * learningRate
+				gradient = out * learningRate
 
 				for f := range weights {
 					weights[f] += inp[f] * gradient
