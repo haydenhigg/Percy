@@ -1,7 +1,9 @@
 package percy
 
 func TrainAveragedFromModel(init Model, inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
-	if n := len(inputs); n == 0 {
+	n := float64(len(inputs))
+
+	if n == 0. {
 		return init
 	}
 
@@ -27,16 +29,19 @@ func TrainAveragedFromModel(init Model, inputs [][]float64, outputs []float64, i
 				}
 
 				bias += gradient
-				biasAverage += bias
 			} else {
 				for f, w := range weights {
 					averages[f] += w
 				}
-
-				biasAverage += bias
 			}
+
+			biasAverage += bias
 		}
 	}
 
-	return NewModel(averages, biasAverage)
+	for f := range averages {
+		averages[f] /= n
+	}
+
+	return NewModel(averages, biasAverage / n)
 }
