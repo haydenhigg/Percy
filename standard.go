@@ -1,6 +1,6 @@
 package percy
 
-func TrainFromModel(init model, inputs [][]float64, outputs []float64, iters int, learningRate float64) model {
+func TrainFromModel(init Model, inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
 	if n := len(inputs); n == 0 {
 		return init
 	}
