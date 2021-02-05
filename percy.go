@@ -12,13 +12,13 @@ func RegularizeAll(mat [][]float64) [][]float64 {
 
 // models
 
-type Model struct{
+type Model struct {
 	Weights []float64
 	Bias	float64
 }
 
 func NewModel(weights []float64, bias float64) Model {
-	return Model{
+	return Model {
 		Weights: weights,
 		Bias: bias,
 	}
