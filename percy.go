@@ -48,11 +48,11 @@ func TrainAveraged(inputs [][]float64, outputs []float64, iters int, learningRat
 
 // prediction
 
-func (mdl Model) RawPredict(x []float64) float64 {
+func (mdl *Model) RawPredict(x []float64) float64 {
 	return dot(mdl.Weights, x) + mdl.Bias
 }
 
-func (mdl Model) Predict(x []float64) float64 {
+func (mdl *Model) Predict(x []float64) float64 {
 	if dot(mdl.Weights, x) > -mdl.Bias {
 		return 1
 	} else {
