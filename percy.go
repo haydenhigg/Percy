@@ -28,7 +28,7 @@ func NewModel(weights []float64, bias float64) Model {
 
 func Train(inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
 	if n := len(inputs); n == 0 {
-		return Model{}
+		return Model {}
 	} else {
 		init := NewModel(make([]float64, len(inputs[0])), 0)
 
@@ -38,7 +38,7 @@ func Train(inputs [][]float64, outputs []float64, iters int, learningRate float6
 
 func TrainAveraged(inputs [][]float64, outputs []float64, iters int, learningRate float64) Model {
 	if n := len(inputs); n == 0 {
-		return Model{}
+		return Model {}
 	} else {
 		init := NewModel(make([]float64, len(inputs[0])), 0)
 

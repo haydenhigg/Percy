@@ -6,7 +6,6 @@ func TrainFromModel(init Model, inputs [][]float64, outputs []float64, iters int
 	}
 
 	weights := makeCopy(init.Weights)
-
 	bias := init.Bias
 	
 	var out float64
